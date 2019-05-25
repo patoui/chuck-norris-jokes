@@ -22,9 +22,9 @@ class JokeFactoryTest extends TestCase
     public function it_returns_a_predefined_joke()
     {
         $chuckNorrisJokes = [
-            'Some people wear Superman pajamas. Superman wears Chuck Norris pajamas.',
-            'Chuck Norris\' belly button is actually a power outlet.',
-            'Chuck Norris is the reason why Waldo is hiding.',
+            'Some people wear Superman pajamas. Superman wears Chuck Norris pajamas',
+            'Chuck Norris\' belly button is actually a power outlet',
+            'Chuck Norris is the reason why Waldo is hiding',
         ];
 
         $jokes = new JokeFactory();
