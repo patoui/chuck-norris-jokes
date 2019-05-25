@@ -2,23 +2,25 @@
 
 namespace Patoui\ChuckNorrisJokes;
 
+use GuzzleHttp\Client;
+
 class JokeFactory
 {
-    protected $jokes = [
-        'Some people wear Superman pajamas. Superman wears Chuck Norris pajamas',
-        'Chuck Norris\' belly button is actually a power outlet',
-        'Chuck Norris is the reason why Waldo is hiding',
-    ];
+    const API_ENDPOINT = 'http://api.icndb.com/jokes/random';
 
-    public function __construct(array $jokes = null)
+    protected $client;
+
+    public function __construct(Client $client = null)
     {
-        if ($jokes) {
-            $this->jokes = $jokes;
-        }
+        $this->client = $client ?: new Client();
     }
 
     public function getRandomJoke()
     {
-        return $this->jokes[array_rand($this->jokes)];
+        $response = $this->client->get(self::API_ENDPOINT);
+
+        $joke = json_decode($response->getBody()->getContents());
+
+        return $joke->value->joke;
     }
 }
