@@ -1,0 +1,26 @@
+{
+    "name": "patoui/chuck-norris-jokes",
+    "description": "Create random Chuck Norris jokes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patrique Ouimet",
+            "email": "patrique.ouimet@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Patoui\\ChuckNorrisJokes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Patoui\\ChuckNorrisJokes\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    }
+}
