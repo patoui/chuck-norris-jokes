@@ -43,6 +43,9 @@ class LaravelTest extends TestCase
             ->once()
             ->andReturn('some joke');
 
-        $this->get('chuck-norris')->assertStatus(200);
+        $this->get('chuck-norris')
+            ->assertViewIs('chuck-norris::joke')
+            ->assertViewHas('joke', 'some joke')
+            ->assertStatus(200);
     }
 }
