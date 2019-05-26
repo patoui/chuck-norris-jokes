@@ -4,11 +4,10 @@ namespace Patoui\ChuckNorrisJokes\Tests;
 
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\Artisan;
+use Patoui\ChuckNorrisJokes\Models\Joke;
 use Patoui\ChuckNorrisJokes\Facades\ChuckNorris;
 use Patoui\ChuckNorrisJokes\Console\ChuckNorrisJoke;
 use Patoui\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
-use Patoui\ChuckNorrisJokes\JokeFactory;
-use Patoui\ChuckNorrisJokes\Models\Joke;
 
 class LaravelTest extends TestCase
 {
