@@ -2,8 +2,10 @@
 
 namespace Patoui\ChuckNorrisJokes;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Patoui\ChuckNorrisJokes\Console\ChuckNorrisJoke;
+use Patoui\ChuckNorrisJokes\Http\Controllers\ChuckNorrisController;
 
 class ChuckNorrisJokesServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,14 @@ class ChuckNorrisJokesServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([ChuckNorrisJoke::class]);
         }
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'chuck-norris');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/chuck-norris'),
+        ]);
+
+        Route::get('chuck-norris', ChuckNorrisController::class);
     }
 
     public function register()
