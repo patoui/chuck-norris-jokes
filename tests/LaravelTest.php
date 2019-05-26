@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Artisan;
 use Patoui\ChuckNorrisJokes\Facades\ChuckNorris;
 use Patoui\ChuckNorrisJokes\Console\ChuckNorrisJoke;
 use Patoui\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
+use Patoui\ChuckNorrisJokes\JokeFactory;
+use Patoui\ChuckNorrisJokes\Models\Joke;
 
 class LaravelTest extends TestCase
 {
@@ -18,6 +20,13 @@ class LaravelTest extends TestCase
     protected function getPackageAliases($app)
     {
         return ['ChuckNorris' => ChuckNorrisJoke::class];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        include_once __DIR__.'/../database/migrations/create_jokes_table.php.stub';
+
+        (new \CreateJokesTable)->up();
     }
 
     /** @test */
@@ -47,5 +56,17 @@ class LaravelTest extends TestCase
             ->assertViewIs('chuck-norris::joke')
             ->assertViewHas('joke', 'some joke')
             ->assertStatus(200);
+    }
+
+    /** @test */
+    public function it_can_access_the_database()
+    {
+        $joke = new Joke();
+        $joke->joke = 'this is funny';
+        $joke->save();
+
+        $newJoke = Joke::find($joke->id);
+
+        $this->assertSame($newJoke->joke, 'this is funny');
     }
 }
